@@ -36,6 +36,14 @@ def speak(say):
     tts.say(say)
     tts.runAndWait()
 
+def save(word):
+    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
+    data = response.json()
+    with open("word.txt", "w") as f:
+        json.dump(data, f)
+    print("The data is saved to a file word.txt")
+    speak("The data is saved to a file word.txt")
+    
 def meaning(word):
     try:
         response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
@@ -46,14 +54,14 @@ def meaning(word):
         print('Meaning not found')
         speak('Meaning not found')
 
-def save(word):
-    response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
-    data = response.json()
-    with open("word.txt", "w") as f:
-        json.dump(data, f)
-    print("The data is saved to a file word.txt")
-    speak("The data is saved to a file word.txt")
-
+def link(word):
+    try:
+        speak('I open the link in the browser')
+        webbrowser.open_new(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
+    except Exception:
+        print('Link not found')
+        speak('Link not found')
+        
 def example(word):
     try:
         response = requests.get(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
@@ -63,14 +71,6 @@ def example(word):
     except Exception:
         print('Example not found')
         speak('Example not found')
-
-def link(word):
-    try:
-        speak('I open the link in the browser')
-        webbrowser.open_new(f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}')
-    except Exception:
-        print('Link not found')
-        speak('Link not found')
 
 
 for speech in listen():
