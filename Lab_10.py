@@ -1,4 +1,5 @@
-import pyttsx3, pyaudio, vosk
+import pyttsx3
+import pyaudio, vosk
 import json, requests
 import webbrowser
 
