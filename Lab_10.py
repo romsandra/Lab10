@@ -97,4 +97,4 @@ for speech in listen():
         exit()
     else:
         print('The command is not recognized')
-        speak('error')
+        speak('error') 
